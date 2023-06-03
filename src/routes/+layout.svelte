@@ -6,7 +6,9 @@
 </script>
 
 <svelte:head>
-    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true">
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@251;700&display=swap" rel="stylesheet">
 </svelte:head>
 
 <Header />
@@ -18,8 +20,8 @@
 
 <style>
     :global(.limiter) {
-        max-width: 1520px;
-        padding: 0 80px;
+        max-width: 1460px; /* 1440 + 20 px */
+        padding: 0 10px;
         margin: auto;
     }
 
@@ -28,6 +30,11 @@
         display: flex;
         flex-direction: column;
     }
+    :global(:root) {
+        --geologica: 'Geologica', sans-serif;
+        --roboto-mono: 'Roboto Mono', monospace;
+    }
+
     article {
         flex-grow: 1;
     }

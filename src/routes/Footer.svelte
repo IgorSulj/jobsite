@@ -10,9 +10,9 @@
             <p>т. +375 25 633 19 08, г. т. +375 17 360 05 08</p>
             <p>grandalira@gmail.com</p>
         </div>
-        <div class="insta-logo">
+        <a href="https://www.instagram.com/rabotavsem.by/" class="insta-logo">
             <img src="{instaLogo}" alt="Лого Instagram">
-        </div>
+        </a>
     </div>
 </footer>
 
@@ -20,13 +20,15 @@
     footer {
         background-color: black;
         padding: 20px 0;
-        font-family: 'Geologica', sans-serif;
+        font-family: var(--geologica);
         font-size: 16px;
+        line-height: 20px;
     }
 
     #elems {
         display: flex;
         justify-content: space-between;
+        gap: 40px;
         align-items: center;
         color: white;
     }

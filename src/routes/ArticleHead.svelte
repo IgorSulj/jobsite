@@ -3,37 +3,40 @@
 </script>
 
 <div id="header__bottom" class="limiter">
-    <div class="flag">
+    <div class="flag side">
         <img src="{flag}" alt="Флаг Германии">
     </div>
-    <div>Работа в Европе</div>
-    <div class="phones">
-        ПОЗВОНИТЕ или НАПИШИТЕ НАМ
-        <span class="bold">+375 (17) 360-05-08</span>
-        <span class="bold">+375 (25) 633-19-08</span>
-    </div>
+    <div>Работа в Германии</div>
+    <div class="side"></div>
 </div>
     
 <style>
     #header__bottom {
         display: flex;
         align-items: center;
-        justify-content: space-between;
         gap: 20px;
-        font-family: 'Geologica', sans-serif;
-        font-weight: 100;
+        font-family: var(--geologica);
+        font-weight: 250;
         margin-bottom: 30px;
+    }
+
+    #header__bottom div {
+        flex-basis: 0;
+        flex-grow: 1;
     }
 
     #header__bottom div:nth-child(2) {
         text-transform: uppercase;
         font-family: 'Geologica', sans-serif;
+        text-align: center;
         font-size: 36px;
         font-weight: 700;
+        flex-basis: auto;
     }
 
-    .flag {
-        width: 70px;
+    .side {
+        max-width: 80px;
+        flex-basis: 0;
     }
 
     .flag img {
@@ -41,14 +44,13 @@
         height: 100%;
     }
 
-    .phones {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
+    @media (max-width: 450px) {
+        #header__bottom div:nth-child(2) {
+            font-size: 32px;
+        }
 
-    span.bold {
-        font-size: 18px;
-        font-weight: 700;
+        .side {
+            display: none;
+        }
     }
 </style>
