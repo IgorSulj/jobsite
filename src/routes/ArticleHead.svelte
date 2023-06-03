@@ -1,5 +1,5 @@
 <script>
-    import flag from 'src/lib/img/GermanyFlag.svg'
+    import flag from '$lib/img/GermanyFlag.svg'
 </script>
 
 <div id="header__bottom" class="limiter">
@@ -13,12 +13,13 @@
         <span class="bold">+375 (25) 633-19-08</span>
     </div>
 </div>
-
+    
 <style>
     #header__bottom {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 20px;
         font-family: 'Geologica', sans-serif;
         font-weight: 100;
         margin-bottom: 30px;

@@ -1,29 +1,34 @@
 <script lang="ts">
     import 'reset-css/reset.css'
-    import HeaderMenu from './HeaderMenu.svelte';
-    import HeaderBottom from './HeaderBottom.svelte';
+    import Header from './Header.svelte';
+    import ArticleHead from './ArticleHead.svelte';
+    import Footer from './Footer.svelte';
 </script>
 
 <svelte:head>
     <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100;700&display=swap" rel="stylesheet">
 </svelte:head>
 
-<header id="header">
-    <HeaderMenu />
-    <HeaderBottom />
-</header>
-<slot></slot>
-<footer id="footer"></footer>
+<Header />
+<article>
+    <ArticleHead />
+    <slot></slot>
+</article>
+<Footer />
 
 <style>
     :global(.limiter) {
-        max-width: 1440px;
+        max-width: 1520px;
+        padding: 0 80px;
         margin: auto;
     }
 
-    #header {
-        height: 80px;
-        background-color: black;
-        padding: 0 80px;
+    :global(body) {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    article {
+        flex-grow: 1;
     }
 </style>
