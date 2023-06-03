@@ -1,3 +1,7 @@
+<script>
+    import DownloadButton from "$lib/components/DownloadButton.svelte";
+
+</script>
 <h1>Для соискателей работы в Германии</h1>
 <span class="line"></span>
 <div class="limiter">
@@ -53,6 +57,9 @@
         <h2>Сколько времени занимает оформление документов?</h2>
         <p>На оформление всех документов ориентировочно необходимо около 1-6 месяцев с момента получения контракта от работодателя до момента получения рабочей немецкой Визы D.</p>
     </div>
+    <div class="button-wrapper">
+        <DownloadButton />
+    </div>
 </div>
 
 <style>
@@ -104,6 +111,13 @@
 
     .qa__list li::marker {
         content: "- ";
+    }
+
+    .button-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
     }
 
     @media (max-width: 450px) {
