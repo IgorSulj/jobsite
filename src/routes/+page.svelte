@@ -1,9 +1,11 @@
 <script>
     import DownloadButton from "$lib/components/DownloadButton.svelte";
-
+    import ArticleHead from "./ArticleHead.svelte";
+    import flag from '$lib/img/GermanyFlag.svg'
 </script>
+
+<ArticleHead header='Работа в Германии' img={flag} altImg='Флаг Германии' />
 <h1>Для соискателей работы в Германии</h1>
-<span class="line"></span>
 <div class="limiter">
     <div class="qa">
         <h2>Кто мы?</h2>
@@ -63,21 +65,6 @@
 </div>
 
 <style>
-    h1 {
-        font-family: var(--geologica);
-        font-weight: 700;
-        text-align: center;
-        font-size: 36px;
-        margin-bottom: 30px;
-    }
-
-    .line {
-        display: block;
-        height: 0;
-        border: 1px solid black;
-        margin-bottom: 30px;
-    }
-
     .qa {
         font-family: var(--geologica);
         margin-bottom: 30px;

@@ -1,7 +1,6 @@
 <script lang="ts">
     import 'reset-css/reset.css'
     import Header from './Header.svelte';
-    import ArticleHead from './ArticleHead.svelte';
     import Footer from './Footer.svelte';
 </script>
 
@@ -13,12 +12,19 @@
 
 <Header />
 <article>
-    <ArticleHead />
     <slot></slot>
 </article>
 <Footer />
 
 <style>
+    :global(h1) {
+        font-family: var(--geologica);
+        font-weight: 700;
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+
     :global(.limiter) {
         max-width: 1460px; /* 1440 + 20 px */
         padding: 0 10px;

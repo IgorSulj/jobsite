@@ -1,12 +1,14 @@
-<script>
-    import flag from '$lib/img/GermanyFlag.svg'
+<script lang="ts">
+    export let header: string
+    export let img: string
+    export let altImg: string = ''
 </script>
 
 <div id="header__bottom" class="limiter">
     <div class="flag side">
-        <img src="{flag}" alt="Флаг Германии">
+        <img src="{img}" alt={altImg}>
     </div>
-    <div>Работа в Германии</div>
+    <div>{header}</div>
     <div class="side"></div>
 </div>
     
