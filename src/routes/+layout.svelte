@@ -17,6 +17,10 @@
 <Footer />
 
 <style>
+    :global(*) {
+        box-sizing: border-box;
+    }
+
     :global(h1) {
         font-family: var(--geologica);
         font-weight: 700;
