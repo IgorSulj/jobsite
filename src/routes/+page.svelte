@@ -4,6 +4,8 @@
     import flag from '$lib/img/GermanyFlag.svg'
 </script>
 
+<svelte:head><title>Главная</title></svelte:head>
+
 <ArticleHead header='Работа в Германии' img={flag} altImg='Флаг Германии' />
 <h1>Для соискателей работы в Германии</h1>
 <div class="limiter">

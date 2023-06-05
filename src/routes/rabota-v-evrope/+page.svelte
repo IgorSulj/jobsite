@@ -3,6 +3,10 @@
     import flag from '$lib/img/Flag_of_Europe.svg'
 </script>
 
+<svelte:head>
+    <title>Работа в Европе</title>
+</svelte:head>
+
 <ArticleHead header="Работа в Европе" img={flag} altImg='Флаг Европы' />
 <h1>Работа вахтой</h1>
 <div id="content" class="limiter">

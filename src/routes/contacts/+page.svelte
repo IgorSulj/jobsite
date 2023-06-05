@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Контакты</title>
+</svelte:head>
+
 <h1>Контакты</h1>
 <div class="limiter" id="content">
     <h2>Свяжитесь с нами</h2>
