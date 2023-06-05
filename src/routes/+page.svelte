@@ -99,13 +99,6 @@
         content: "- ";
     }
 
-    .button-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 30px;
-    }
-
     @media (max-width: 450px) {
         h1 {
             font-size: 32px;

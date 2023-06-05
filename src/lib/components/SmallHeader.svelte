@@ -1,15 +1,36 @@
 <script lang="ts">
     import {page} from '$app/stores'
-    import outsidePress from '$lib/actions/outsidepress';
+    import { onMount } from 'svelte';
     let active = false
     let main_content: HTMLElement
-    let button: HTMLElement
     export let links: readonly(readonly [string, string])[]
+
+    const handleClick = (event: MouseEvent) => {
+        let target = event.target as Element
+        if (target.closest('#burger__wrapper')) {
+            active = !active
+        }
+        else if (!target.closest('#main_content')) {
+            active = false
+        }
+    }
+
+    const handleScroll = () => (active = false)
+
+    onMount(() => {
+        document.addEventListener('click', handleClick)
+        document.addEventListener('scroll', handleScroll)
+
+        return () => {
+            document.removeEventListener('click', handleClick)
+            document.removeEventListener('scroll', handleScroll)
+        }
+    })
 </script>
 
 <header>
     <div id="header__wrapper" class="limiter">
-        <button id="burger__wrapper" bind:this={button} class:active on:click={() => active = !active}>
+        <button id="burger__wrapper" class:active>
             <span id="burger-top"></span>
             <span id="burger-middle"></span>
             <span id="burger-bottom"></span>
@@ -17,8 +38,6 @@
     </div>
     <div id="main-content"
         bind:this={main_content}
-        use:outsidePress={button}
-        on:outpress={() => (active = false)}
         style="height: {active ? main_content.scrollHeight + 'px' : 0}">
         {#each links as [link, name] (link)}
             <span class="border"></span>
@@ -57,6 +76,7 @@
         gap: 10px;
         background-color: transparent;
         border: none;
+        cursor: pointer;
     }
 
     #burger__wrapper span {
