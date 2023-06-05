@@ -13,13 +13,13 @@
 </svelte:head>
 
 <Header />
-{#if $navigating}
-    <Spinner />
-{:else}
 <article>
+    {#if $navigating}
+    <Spinner />
+    {:else}
     <slot></slot>
+    {/if}
 </article>
-{/if}
 <Footer />
 
 <style>
