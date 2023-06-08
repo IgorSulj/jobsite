@@ -1,24 +1,32 @@
 <script lang="ts">
-    import BigHeader from '$lib/components/BigHeader.svelte';
-    import SmallHeader from '$lib/components/SmallHeader.svelte';
-    import { onMount } from 'svelte';
-
     const links = [
-        ['/', 'Работа Германия'],
-        ['/rabota-v-evrope', 'Работа вахтой'],
+        ['/', 'Германия'],
+        ['/rabota-v-evrope', 'Европа'],
         ['/contacts', 'Контакты']
     ] as const
-
-    let isSmall = true;
-    onMount(() => {
-        let media = window.matchMedia('(max-width: 750px)')
-        isSmall = media.matches
-        media.addEventListener('change', event => isSmall = event.matches)
-    })
 </script>
 
-{#if isSmall}
-<SmallHeader links={links} />
-{:else}
-<BigHeader links={links} />
-{/if}
+<header>
+    {#each links as [link, name] }
+        <a href="{link}" class="link">{name}</a>
+    {/each}
+</header>
+
+<style>
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        height: 50px;
+        margin-bottom: 40px;
+    }
+
+    .link {
+        color: var(--blue);
+        font-family: var(--geologica);
+        font-weight: 500;
+        font-size: 24px;
+        text-decoration: none;
+    }
+</style>
