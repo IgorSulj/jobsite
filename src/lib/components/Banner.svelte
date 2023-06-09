@@ -55,9 +55,36 @@
         flex-basis: 800px;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
         gap: 20px;
         padding: 50px 70px 50px 0;
     }
 
+    @media (max-width: 1000px) {
+        #banner {
+            flex-direction: column;
+        }
+
+        #banner__left {
+            height: auto;
+            flex-basis: auto;
+            padding: 68px 50px;
+            text-align: center;
+        }
+
+        #banner__right {
+            padding: 0 50px 70px;
+            flex-basis: auto;
+        }
+    }
+
+    @media (max-width: 800px) {
+        #banner__left {
+            padding: 68px 20px;
+        }
+        #banner__right {
+            padding: 0 50px;
+            margin-bottom: 70px;
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
