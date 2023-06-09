@@ -1,42 +1,30 @@
 <script>
+    import Banner from '$lib/components/Banner.svelte';
+    import BannerItem from '$lib/components/BannerItem.svelte';
     import Openable from '$lib/components/Openable.svelte';
-import check from '$lib/img/check.svg'
+    import flag from '$lib/img/GermanyFlag.svg'
 </script>
 
 <div class="limiter" id="main-content">
+    <Banner flag="{flag}">
+        <h2 slot="header">Работа в Германии по немецкой визе D</h2>
+        <BannerItem>
+            Легальная работа у прямого работодателя в Германии:
+            контракты от 1 года, мед. страховка, возможность забрать семью.
+        </BannerItem>
+        <BannerItem>
+            Возможность подтвердить профессионально-техническое,
+            средне-специальное или высшее образование.
+        </BannerItem>
+        <BannerItem>
+            Возможность карьерного роста и роста заработной платы.
+        </BannerItem>
+        <BannerItem>
+            Через 6 месяцев Вы получите немецкое ВНЖ, 
+            через 5 лет - возможность претендовать на ПМЖ.
+        </BannerItem>
+    </Banner>
 
-    <div id="banner">
-        <div id="banner__left">
-            <h2>Работа в Германии по немецкой визе D</h2>
-        </div>
-        <div id="banner__right">
-            <div class="point">
-                <div><img src="{check}" alt="Галка"></div>
-                <p>
-                    Легальная работа у прямого работодателя в Германии:
-                    контракты от 1 года, мед. страховка, возможность забрать семью.
-                </p>
-            </div>
-            <div class="point">
-                <div><img src="{check}" alt="Галка"></div>
-                <p>
-                    Возможность подтвердить профессионально-техническое,
-                    средне-специальное или высшее образование.
-                </p>
-            </div>
-            <div class="point">
-                <div><img src="{check}" alt="Галка"></div>
-                <p>Возможность карьерного роста и роста заработной платы.</p>
-            </div>
-            <div class="point">
-                <div><img src="{check}" alt="Галка"></div>
-                <p>
-                    Через 6 месяцев Вы получите немецкое ВНЖ, 
-                    через 5 лет - возможность претендовать на ПМЖ.
-                </p>
-            </div>
-        </div>
-    </div>
     <div id="bottom-list">
         <Openable>
             <h3 class="bottom-list__header" slot="header">Требования к соискателю работы</h3>
@@ -93,48 +81,6 @@ import check from '$lib/img/check.svg'
 </div>
 
 <style>
-    #banner {
-        background-color: var(--brown);
-        border-radius: 20px;
-        max-width: 1400px;
-        margin: 0 auto 40px;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    #banner__left {
-        font-family: var(--geologica);
-        font-weight: 500;
-        font-size: 36px;
-        flex-basis: 430px;
-        height: 600px;
-        padding: 68px 0 68px 68px;
-    }
-
-    #banner__right {
-        height: 600px;
-        flex-basis: 780px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 20px;
-        padding: 50px 70px 50px 0;
-    }
-
-    .point {
-        display: flex;
-    }
-
-    .point div {
-        margin-top: 16px;
-    }
-
-    .point p {
-        margin-top: 28px;
-        font-family: var(--geologica);
-        font-weight: 250;
-        font-size: 24px;
-    }
 
     #bottom-list {
         display: flex;
