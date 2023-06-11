@@ -51,6 +51,7 @@
         --roboto-mono: 'Roboto Mono', monospace;
         --blue: #3081BB;
         --brown: #F8EBE3;
+        --grey: #CECECE;
     }
 
     article {

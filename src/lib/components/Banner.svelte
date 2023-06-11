@@ -2,25 +2,30 @@
     export let flag: string
 </script>
 
-<div id="banner">
-    <div id="flag">
-        <img src="{flag}" alt="">
-    </div>
-    <div id="banner__left">
-        <slot name="header"></slot>
-    </div>
-    <div id="banner__right">
-        <slot></slot>
+<div id="banner__wrapper">
+    <div id="banner">
+        <div id="flag">
+            <img src="{flag}" alt="">
+        </div>
+        <div id="banner__left">
+            <slot name="header"></slot>
+        </div>
+        <div id="banner__right">
+            <slot></slot>
+        </div>
     </div>
 </div>
 
 <style>
+    #banner__wrapper {
+        max-width: 1400px;
+        margin: 0 auto 40px;
+    }
+
     #banner {
         position: relative;
         background-color: var(--brown);
         border-radius: 20px;
-        max-width: 1400px;
-        margin: 0 auto 40px;
         display: flex;
         gap: 50px;
         justify-content: space-between;

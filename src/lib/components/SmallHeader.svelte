@@ -28,7 +28,7 @@
     })
 </script>
 
-<header>
+<header class:active>
     <div id="header__wrapper" class="limiter">
         <button id="burger__wrapper" class:active>
             <span id="burger-top"></span>
@@ -36,7 +36,7 @@
             <span id="burger-bottom"></span>
         </button>
     </div>
-    <div id="main-content"
+    <div id="main-content" class:active
         bind:this={main_content}
         style="height: {active ? main_content.scrollHeight + 'px' : 0}">
         {#each links as [link, name] (link)}
@@ -45,23 +45,19 @@
             class="link"
             class:active={$page.route.id == link}>{name}</a>
         {/each}
-        <span class="border"></span>
-        <div id="phones">
-            <p>+375 (17) 360-05-08</p>
-            <p>+375 (25) 633-19-08</p>
-        </div>
     </div>
 </header>
 
 <style>
     header {
         height: 80px;
-        background-color: black;
         margin-bottom: 30px;
         position: sticky;
         top: 0;
+        z-index: 120;
+        background-color: transparent;
     }
-
+    
     #header__wrapper {
         display: flex;
         flex-direction: row-reverse;
@@ -78,11 +74,13 @@
         border: none;
         cursor: pointer;
     }
-
+    
     #burger__wrapper span {
         width: 100%;
+        border: 1px solid var(--blue);
+        border-radius: 2px;
     }
-
+    
     #burger__wrapper:not(.active) #burger-top, #burger-bottom {
         transition: rotate 0.125s, translate 0.125s 0.125s;
     }
@@ -94,26 +92,21 @@
     #burger-middle {
         transition: opacity 0s 0.125s;
     }
-
+    
     #burger__wrapper.active #burger-middle {
         opacity: 0;
     }
-
+    
     #burger__wrapper.active #burger-top {
         translate: 0 12px;
         rotate: 45deg;
     }
-
+    
     #burger__wrapper.active #burger-bottom {
         translate: 0 -12px;
         rotate: -45deg;
     }
-
-    #burger__wrapper span {
-        border: 1px solid white;
-        border-radius: 2px;
-    }
-
+    
     #main-content {
         display: flex;
         flex-direction: column;
@@ -121,36 +114,36 @@
         top: 80px;
         left: 0;
         right: 0;
-        background-color: black;
-        transition: height 0.25s;
+        background-color: transparent;
+        transition: all 0.25s;
         overflow: hidden;
         width: 100%;
+    }
+    :is(header, #burger-wrapper) {
+        transition: background 0.25s;
+    }
+
+    :is(header, #main-content, #burger__wrapper).active {
+        background-color: white;
     }
 
     .link {
         width: 100%;
         text-align: center;
         padding: 20px;
-        color: white;
+        color: var(--grey);
         font-family: var(--geologica);
         text-decoration: none;
-        font-weight: 700;
+        font-weight: 500;
+        font-size: 24px;
     }
 
     .link.active {
-        color: #e6d00b;
+        color: var(--blue);
     }
 
     .border {
         height: 0;
-        border: 0.5px solid white;
-    }
-
-    #phones {
-        color: white;
-        text-align: center;
-        padding: 20px;
-        font-family: var(--geologica);
-        font-weight: 700;
+        border: 0.5px solid var(--grey);
     }
 </style>
