@@ -106,4 +106,10 @@
         color: var(--blue);
         font-weight: 500;
     }
+
+    @media (max-width: 1000px) {
+        .bottom-list__header {
+            font-size: 32px;
+        }
+    }
 </style>

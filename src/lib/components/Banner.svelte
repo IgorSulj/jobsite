@@ -67,13 +67,15 @@
     @media (max-width: 1000px) {
         #banner {
             flex-direction: column;
+            gap: 20px;
         }
 
         #banner__left {
             height: auto;
             flex-basis: auto;
-            padding: 68px 50px;
+            padding: 68px 50px 0;
             text-align: center;
+            font-size: 32px;
         }
 
         #banner__right {
@@ -84,7 +86,7 @@
 
     @media (max-width: 800px) {
         #banner__left {
-            padding: 68px 20px;
+            padding: 68px 20px 0;
         }
         #banner__right {
             padding: 0 50px;

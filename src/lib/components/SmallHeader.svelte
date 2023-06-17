@@ -2,7 +2,6 @@
     import {page} from '$app/stores'
     import { onMount } from 'svelte';
     let active = false
-    let main_content: HTMLElement
     export let links: readonly(readonly [string, string])[]
 
     const handleClick = (event: MouseEvent) => {
@@ -37,8 +36,7 @@
         </button>
     </div>
     <div id="main-content" class:active
-        bind:this={main_content}
-        style="height: {active ? main_content.scrollHeight + 'px' : 0}">
+        style="display: {active ? 'flex' : 'none'}">
         {#each links as [link, name] (link)}
             <span class="border"></span>
             <a href="{link}" 
@@ -115,12 +113,8 @@
         left: 0;
         right: 0;
         background-color: transparent;
-        transition: all 0.25s;
         overflow: hidden;
         width: 100%;
-    }
-    :is(header, #burger-wrapper) {
-        transition: background 0.25s;
     }
 
     :is(header, #main-content, #burger__wrapper).active {
