@@ -48,9 +48,6 @@
     }
 
     #banner__left {
-        font-family: var(--geologica);
-        font-weight: 500;
-        font-size: 36px;
         flex-basis: 430px;
         height: 600px;
         padding: 68px 0 68px 68px;

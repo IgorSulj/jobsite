@@ -1,4 +1,5 @@
 <script>
+    import BannerHeader from '$lib/components/BannerHeader.svelte';
     import Banner from '$lib/components/Banner.svelte';
     import BannerItem from '$lib/components/BannerItem.svelte';
     import Openable from '$lib/components/Openable.svelte';
@@ -7,7 +8,7 @@
 
 <div class="limiter" id="main-content">
     <Banner flag="{flag}">
-        <h2 slot="header">Работа в Германии по немецкой визе D</h2>
+        <BannerHeader slot="header">Работа в Германии по немецкой визе D</BannerHeader>
         <BannerItem>
             Легальная работа у прямого работодателя в Германии:
             контракты от 1 года, мед. страховка, возможность забрать семью.
