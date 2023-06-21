@@ -6,6 +6,10 @@
     import flag from '$lib/img/Flag_of_Europe.svg'
 </script>
 
+<svelte:head>
+    <title>Работа в Европе</title>
+</svelte:head>
+
 <div class="limiter">
     <Banner flag={flag}>
         <BannerHeader slot="header">
