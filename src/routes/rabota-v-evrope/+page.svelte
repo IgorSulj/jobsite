@@ -120,4 +120,10 @@
         list-style-type: disc;
         margin-left: 25px;
     }
+
+    @media (max-width: 1000px) {
+        .bottom-list__header {
+            font-size: 28px;
+        }
+    }
 </style>

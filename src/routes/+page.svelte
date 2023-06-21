@@ -110,7 +110,7 @@
 
     @media (max-width: 1000px) {
         .bottom-list__header {
-            font-size: 32px;
+            font-size: 28px;
         }
     }
 </style>
