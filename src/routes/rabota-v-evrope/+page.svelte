@@ -56,7 +56,7 @@
             <ol class="bottom-list__list" slot="text">
                 <li>
                     1. Свидетельство (диплом) с апостилем и 
-                    переводом на английский язык, заверенное нотариально.
+                    переводом на английский язык, заверенным нотариально.
                 </li>
                 <li>
                     2. Справка о несудимости с апостилем и переводом на литовский язык. 
@@ -119,5 +119,11 @@
     .payment-list .bottom-list__list {
         list-style-type: disc;
         margin-left: 25px;
+    }
+
+    @media (max-width: 1000px) {
+        .bottom-list__header {
+            font-size: 28px;
+        }
     }
 </style>
