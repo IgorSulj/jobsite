@@ -1,24 +1,19 @@
 <script lang="ts">
-    import BigHeader from '$lib/components/BigHeader.svelte';
-    import SmallHeader from '$lib/components/SmallHeader.svelte';
-    import { onMount } from 'svelte';
+    import BigHeader from "$lib/components/BigHeader.svelte";
+    import SmallHeader from "$lib/components/SmallHeader.svelte";
+    import { mediaQuery } from "$lib/stores"
 
     const links = [
-        ['/', 'Работа Германия'],
-        ['/rabota-v-evrope', 'Работа вахтой'],
+        ['/', 'Германия'],
+        ['/rabota-v-evrope', 'Европа'],
         ['/contacts', 'Контакты']
     ] as const
 
-    let isSmall = true;
-    onMount(() => {
-        let media = window.matchMedia('(max-width: 750px)')
-        isSmall = media.matches
-        media.addEventListener('change', event => isSmall = event.matches)
-    })
+    let isSmallQuery = mediaQuery('(max-width: 900px)')
 </script>
 
-{#if isSmall}
-<SmallHeader links={links} />
+{#if $isSmallQuery === undefined || $isSmallQuery}
+    <SmallHeader links={links} />
 {:else}
-<BigHeader links={links} />
+    <BigHeader links={links} />
 {/if}
