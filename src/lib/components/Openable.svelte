@@ -23,6 +23,8 @@
             lower = lower
         })
         observer.observe(main!)
+
+        return observer.disconnect()
     })
 
     const handleSwitch = () => {active = !active}
@@ -38,7 +40,7 @@
         <div id="icon" class:active><img src="{close}" alt="Закрыть"></div>
     </div>
     {#if active}
-        <div id="lower" bind:this={lower} class:active transition:fade="{{duration: 250}}">
+        <div id="lower" bind:this={lower} class:active transition:fade|local="{{duration: 250}}">
             <slot name="text"></slot>
         </div>
     {/if}
