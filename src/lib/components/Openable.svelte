@@ -24,7 +24,7 @@
         })
         observer.observe(main!)
 
-        return observer.disconnect()
+        return observer.disconnect
     })
 
     const handleSwitch = () => {active = !active}
