@@ -6,7 +6,7 @@
 
 <header>
     {#each links as [link, name] }
-        <a href="{link}" class="link" class:active={$page.route.id == link}>{name}</a>
+        <a href="{link}" class="link" class:active={$page.url.pathname == link}>{name}</a>
     {/each}
 </header>
 
