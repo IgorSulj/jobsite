@@ -6,12 +6,6 @@
     import Spinner from '$lib/components/Spinner.svelte';
 </script>
 
-<svelte:head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true">
-    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100;500;700&display=swap" rel="stylesheet">
-</svelte:head>
-
 <Header />
 <article>
     {#if $navigating}
@@ -23,10 +17,6 @@
 <Footer />
 
 <style>
-    :global(*) {
-        box-sizing: border-box;
-    }
-
     :global(h1) {
         font-family: var(--geologica);
         font-weight: 700;
@@ -46,14 +36,6 @@
         display: flex;
         flex-direction: column;
     }
-    :global(:root) {
-        --geologica: 'Geologica', sans-serif;
-        --roboto-mono: 'Roboto Mono', monospace;
-        --blue: #3081BB;
-        --brown: #F8EBE3;
-        --grey: #CECECE;
-    }
-
     article {
         flex-grow: 1;
     }
