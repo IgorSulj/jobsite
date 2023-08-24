@@ -18,4 +18,13 @@
         --brown: #F8EBE3;
         --grey: #CECECE;
     }
+
+    :global(h1) {
+        font-family: var(--geologica);
+        font-weight: 700;
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+
 </style>

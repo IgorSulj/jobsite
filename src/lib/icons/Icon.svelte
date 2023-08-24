@@ -1,19 +1,26 @@
 <script lang="ts">
     export let text: string = ''
+    export let complete: boolean = false
 </script>
 
-<div id="wrapper">
+<button id="wrapper" class:complete>
     <div id="wrapper__icon">
         <div id="icon">
             <slot />
         </div>
     </div>
     {#if text}
-    <p>{text}</p>
+        <p>{text}</p>
     {/if}
-</div>
+</button>
 
 <style>
+    #wrapper {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
     #wrapper__icon {
         margin: auto;
         width: 2.5rem;
@@ -21,7 +28,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #3081BB;
+        background-color: var(--blue);
         border-radius: 50%;
     }
 
@@ -33,5 +40,21 @@
 
     #icon :global(svg *) {
         fill: white;
+    }
+
+    .complete #wrapper__icon {
+        background-color: white;
+    }
+
+    .complete #icon :global(svg *) {
+        fill: var(--blue);
+    }
+
+    p {
+        font-family: var(--geologica);
+        font-weight: 100;
+        font-size: 0.875rem;
+        color: var(--blue);
+        text-align: center;
     }
 </style>

@@ -17,14 +17,6 @@
 <Footer />
 
 <style>
-    :global(h1) {
-        font-family: var(--geologica);
-        font-weight: 700;
-        text-align: center;
-        font-size: 36px;
-        margin-bottom: 30px;
-    }
-
     :global(.limiter) {
         max-width: 1460px; /* 1440 + 20 px */
         padding: 0 10px;

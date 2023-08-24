@@ -2,9 +2,10 @@
     import Icon from "./Icon.svelte";
 
     export let text: string = ''
+    export let complete: boolean = false
 </script>
 
-<Icon {text}>
+<Icon {text} {complete}>
     <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
     <mask id="mask0_218_285" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
     <rect x="0.399902" y="0.400024" width="19.2" height="19.2" fill="#D9D9D9"/>

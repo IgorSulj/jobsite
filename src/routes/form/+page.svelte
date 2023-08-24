@@ -1,5 +1,6 @@
 <script>
     import CheckIcon from "$lib/icons/CheckIcon.svelte";
+    import FormWrapper from "./FormWrapper.svelte";
 </script>
 
 <article>
@@ -12,9 +13,10 @@
         <CheckIcon />
     </div>
     <div class="subform-buttons lower">
-        <CheckIcon />
+        <CheckIcon text="ВУЗ..." complete />
         <CheckIcon />
     </div>
+    <FormWrapper step='personal' />
 </article>
 
 <style>
@@ -32,7 +34,7 @@
         display: flex;
         padding: 15px 10px;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         gap: 10px; 
     }
 
