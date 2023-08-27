@@ -1,18 +1,22 @@
-<script lang="ts" generics="T extends string">
+<script lang="ts">
     import Input from "./Input.svelte";
 
-    export let label: string
-    export let points: Record<T, string>
-    export let value: T = Object.keys(points)[0] as T
+    export let label: string = ''
+    export let points: Record<string, string>
+    export let value: string = Object.keys(points)[0]
 
-    $: entries = Object.entries(points) as [T, string][]
+    $: entries = Object.entries(points)
 </script>
 
-<Input {label}>
-    {#each entries as [key, value] (key) }
-        <label>
-            <input type="radio" name="{label}" value="{key}" bind:group={value}>
-            <span>{points[key]}</span>
-        </label>
-    {/each}
-</Input>
+{#each entries as [key, text] (key) }
+    <label>
+        <input 
+            type="radio"
+            name="{label}" 
+            value="{key}" 
+            bind:group={value}
+        />
+        {text}
+    </label>
+{/each}
+

@@ -17,6 +17,11 @@
         <DateField label="Дата рождения" />
         <FamilyStatusInput label="Семейное положение" />
     </InputRow>
-    <NumberField label="Желаемая зарплата в месяц, €" />
-    <RadioField points={{'germany': 'Хочу работать в Германии'}} />
+    <InputRow>
+        <NumberField label="Желаемая зарплата в месяц, €" />
+        <RadioField label="Я хочу" points={{
+            'germany': 'работать в Германии',
+            'europe': 'работать вахтой'
+        }} />
+    </InputRow>
 </Form>
