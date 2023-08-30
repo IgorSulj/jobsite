@@ -1,11 +1,10 @@
 <script lang="ts">
-    import type { FormStep } from "./forms";
+    import { type FormStep, getLocalStorageStore } from "./forms";
     import Personal from "$lib/forms/Personal.svelte";
-
 </script>
 
 <div class="wrapper">
-    <Personal />
+    <Personal store={getLocalStorageStore("form:personal", {})} />
 </div>
 
 <style>

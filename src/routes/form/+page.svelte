@@ -16,7 +16,7 @@
         <CheckIcon text="ВУЗ..." complete />
         <CheckIcon />
     </div>
-    <FormWrapper step='personal' />
+    <FormWrapper />
 </article>
 
 <style>
