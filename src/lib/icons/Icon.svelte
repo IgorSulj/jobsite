@@ -28,7 +28,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: var(--blue);
+        background-color: white;
         border-radius: 50%;
     }
 
@@ -39,15 +39,15 @@
     }
 
     #icon :global(svg *) {
-        fill: white;
+        fill: var(--blue);
     }
 
     .complete #wrapper__icon {
-        background-color: white;
+        background-color: var(--blue);
     }
 
     .complete #icon :global(svg *) {
-        fill: var(--blue);
+        fill: white;
     }
 
     p {

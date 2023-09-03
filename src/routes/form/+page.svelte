@@ -1,22 +1,26 @@
-<script>
+<script lang="ts">
     import CheckIcon from "$lib/icons/CheckIcon.svelte";
     import FormWrapper from "./FormWrapper.svelte";
+    import { type FormStep, steps } from "./forms";
+
+    let step: FormStep
+
+    let data: any
 </script>
 
 <article>
     <div class="subform-buttons">
-        <CheckIcon />
-        <CheckIcon />
-        <CheckIcon />
-        <CheckIcon />
-        <CheckIcon />
-        <CheckIcon />
+        {#each steps as curr_step }
+            <button on:click={() => step = curr_step} class="upper-icon">
+                <CheckIcon></CheckIcon>
+            </button>
+        {/each}
     </div>
     <div class="subform-buttons lower">
         <CheckIcon text="ВУЗ..." complete />
         <CheckIcon />
     </div>
-    <FormWrapper />
+    <FormWrapper bind:step bind:data />
 </article>
 
 <style>
@@ -40,5 +44,10 @@
 
     .lower {
         padding: 0;
+    }
+
+    .upper-icon {
+        background-color: transparent;
+        border: none;
     }
 </style>

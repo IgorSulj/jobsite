@@ -4,9 +4,12 @@
     export let label: string = ''
     export let value: number = NaN
 
+    $: valueStr = isNaN(value) ? '' : value.toString()
+
     function handleInput(e: any) {
         value = parseFloat(e.target.value)
     }
+    console.log(value)
 </script>
 
 <div class="wrapper">
@@ -15,6 +18,7 @@
         class:error={isNaN(value)} 
         inputmode="numeric" 
         on:input={handleInput}
+        value={valueStr}
         >
     </Input>
 </div>

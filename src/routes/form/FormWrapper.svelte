@@ -1,15 +1,24 @@
 <script lang="ts">
-    import { type FormStep, getLocalStorageStore } from "./forms";
+    import { getLocalStorageStore, validatedStore, validatePersonalForm } from "./forms";
     import Personal from "$lib/forms/Personal.svelte";
+    import Contacts from "$lib/forms/Contacts.svelte";
+
+    const personalStore = getLocalStorageStore("form:personal", {})
+
+    const personalData = validatedStore(personalStore, validatePersonalForm)
+
+    export const data = {
+        personal: $personalData
+    }
 </script>
 
 <div class="wrapper">
-    <Personal store={getLocalStorageStore("form:personal", {})} />
+    <Personal store={personalStore} />
+    <Contacts />
 </div>
 
 <style>
-    .wrapper {
-        display: flex;
-        justify-content: center;
+    div > :global(*) {
+        margin: 0 auto 2rem;
     }
 </style>

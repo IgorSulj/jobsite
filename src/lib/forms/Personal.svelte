@@ -13,14 +13,19 @@
 
     export let store: Writable<any>
 
-    let russianName = ''
-    let englishName = ''
+    let russianName: string
+    let englishName: string
     let birthday: string
     let familyStatus: FamilyStatus
-    let salary: number | undefined = undefined
-    let wantedJob: 'germany' | 'europe' = 'germany';
-
+    let salary: number
+    let wantedJob: 'germany' | 'europe';
+    
     ({russianName, englishName, birthday, familyStatus, salary, wantedJob} = get(store))
+
+    russianName ??= ''
+    englishName ??= ''
+    salary ??= NaN
+    wantedJob ??= 'germany'
 
     $: $store = {
         russianName,
@@ -34,7 +39,7 @@
 <Form>
     <FormHeader slot="header">Личные данные</FormHeader>
     <StringField label="ФИО на русском" bind:value={russianName} />
-    <StringField label="ФИО латиницей" bind:value={englishName} />
+    <StringField label="ФИО латиницей (как в паспорте)" bind:value={englishName} />
     <InputRow>
         <DateField label="Дата рождения" bind:value={birthday} />
         <FamilyStatusInput label="Семейное положение" bind:value={familyStatus} />
@@ -46,5 +51,4 @@
             'europe': 'работать вахтой'
         }} bind:value={wantedJob} />
     </InputRow>
-    <NextButton />
 </Form>

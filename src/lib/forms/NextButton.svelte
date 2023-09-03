@@ -1,9 +1,12 @@
 <script lang="ts">
     import arrowForward from '$lib/img/form/arrowForward.png'
+    import type { MouseEventHandler } from 'svelte/elements';
+
+    export let onclick: MouseEventHandler<HTMLButtonElement> = () => {};
 </script>
 
 <div class="wrapper">
-    <button>
+    <button on:click={onclick}>
         <p>Далее</p>
         <div class="icon">
             <img src={arrowForward} alt="arrow forward">
