@@ -1,12 +1,17 @@
-<script>
+<script lang="ts">
     import NumberField from "./NumberField.svelte";
     import StringField from "./StringField.svelte";
 
+    let code: string
+    let number: number
+
+    export let phoneNumber = ''
+    $: (phoneNumber = code + number)
 </script>
 <div class="wrapper">
-    <StringField label="Код" />
+    <StringField label="Код" bind:value={code} />
     <div class="number-field">
-        <NumberField label="Телефон" />
+        <NumberField label="Телефон" bind:value={number} />
     </div>
 </div>
 
