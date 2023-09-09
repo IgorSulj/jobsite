@@ -9,7 +9,6 @@
     function handleInput(e: any) {
         value = parseFloat(e.target.value)
     }
-    console.log(value)
 </script>
 
 <div class="wrapper">

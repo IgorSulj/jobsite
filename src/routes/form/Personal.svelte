@@ -1,15 +1,15 @@
 <script lang="ts">
     import { get, type Writable } from "svelte/store";
-    import Form from "./Form.svelte";
-    import FormHeader from "./FormHeader.svelte";
-    import NextButton from "./NextButton.svelte";
-    import DateField from "./fields/DateField.svelte";
-    import FamilyStatusInput from "./fields/FamilyStatusInput.svelte";
-    import type {FamilyStatus} from './fields/FamilyStatusInput.svelte'
-    import InputRow from "./fields/InputRow.svelte";
-    import NumberField from "./fields/NumberField.svelte";
-    import RadioField from "./fields/RadioField.svelte";
-    import StringField from "./fields/StringField.svelte";
+    import Form from "$lib/forms/Form.svelte";
+    import FormHeader from "$lib/forms/FormHeader.svelte";
+    import NextButton from "$lib/forms/NextButton.svelte";
+    import DateField from "$lib/forms/fields/DateField.svelte";
+    import FamilyStatusInput from "$lib/forms/fields/FamilyStatusInput.svelte";
+    import type {FamilyStatus} from '$lib/forms/fields/FamilyStatusInput.svelte'
+    import InputRow from "$lib/forms/fields/InputRow.svelte";
+    import NumberField from "$lib/forms/fields/NumberField.svelte";
+    import RadioField from "$lib/forms/fields/RadioField.svelte";
+    import StringField from "$lib/forms/fields/StringField.svelte";
 
     export let store: Writable<any>
 
