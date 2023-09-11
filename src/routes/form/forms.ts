@@ -1,4 +1,5 @@
 import { writable, type Readable, type Writable, derived } from "svelte/store";
+import type { FamilyStatus } from "$lib/forms/fields/FamilyStatusInput.svelte";
 
 export type FormStep = 'personal' 
                      | 'contacts' 
@@ -23,8 +24,15 @@ export function getLocalStorageStore<T>(name: string, init: T): Writable<T> {
     return store
 }
 
-export function validatedStore<T>(store: Readable<T>, f: (val: T) => boolean) {
+export function validatedStore<T>(store: Readable<T>, f = (val: T) => true) {
     return derived(store, ($store) => f($store) ? $store : undefined)
+}
+
+export function withValidation<T>(store: Writable<T>, f = (val: T) => true) {
+    return {
+        raw: store,
+        valid: validatedStore(store, f)
+    }
 }
 
 export function validatePersonalForm(data: any): boolean {
@@ -34,3 +42,27 @@ export function validatePersonalForm(data: any): boolean {
         !isNaN(data.salary)
     )
 }
+
+export const personalFormData = withValidation(
+    getLocalStorageStore('form:personal', {
+        russianName: '',
+        englishName: '',
+        birthday: '2000-01-01',
+        familyStatus: 'not-married' as FamilyStatus,
+        salary: NaN,
+        wantedJob: 'germany'
+    }),
+    validatePersonalForm
+)
+
+export const contactsFormData = withValidation(
+    getLocalStorageStore('form:personal', {
+        country: '',
+        city: '',
+        street: '',
+        flat: '',
+        index: '',
+        phone: '',
+        email: ''
+    })
+)

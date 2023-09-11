@@ -5,20 +5,12 @@
     import InputRow from "$lib/forms/fields/InputRow.svelte";
     import PhoneInput from "$lib/forms/fields/PhoneInput.svelte";
     import StringField from "$lib/forms/fields/StringField.svelte";
+    import { contactsFormData } from "./forms";
 
-    export let store: Writable<any>
-    
-    let country: string
-    let city: string
-    let street: string
-    let flat: string
-    let index: string
-    let phone: string
-    let email: string;
+    let {country, city, street, flat, index, phone, email} = get(contactsFormData.raw)
+    let data = contactsFormData.raw
 
-    ({country, city, street, flat, index, phone, email} = get(store))
-
-    $: $store = {
+    $: $data = {
         country,
         city,
         street,

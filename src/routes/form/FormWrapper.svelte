@@ -1,24 +1,21 @@
 <script lang="ts">
-    import { getLocalStorageStore, validatedStore, validatePersonalForm } from "./forms";
+    import { personalFormData, contactsFormData } from "./forms";
     import Personal from "./Personal.svelte";
     import Contacts from "./Contacts.svelte";
     import Education from "./Education.svelte";
 
-    const personalStore = getLocalStorageStore("form:personal", {})
-    const contactsStore = getLocalStorageStore('form:contacts', {})
+    const personal = personalFormData.valid
+    const contacts = contactsFormData.valid
 
-    const personalData = validatedStore(personalStore, validatePersonalForm)
-    const contactsData = validatedStore(personalStore, () => true)
-
-    export const data = {
-        personal: $personalData,
-        contacts: $contactsData
+    const data = {
+        personal: $personal,
+        contacts: $contacts
     }
 </script>
 
 <div class="wrapper">
-    <Personal store={personalStore} />
-    <Contacts store={contactsStore} />
+    <Personal />
+    <Contacts />
     <Education />
 </div>
 

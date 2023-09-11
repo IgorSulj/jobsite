@@ -1,33 +1,19 @@
 <script lang="ts">
-    import { get, type Writable } from "svelte/store";
+    import { get } from "svelte/store";
     import Form from "$lib/forms/Form.svelte";
     import FormHeader from "$lib/forms/FormHeader.svelte";
-    import NextButton from "$lib/forms/NextButton.svelte";
     import DateField from "$lib/forms/fields/DateField.svelte";
     import FamilyStatusInput from "$lib/forms/fields/FamilyStatusInput.svelte";
-    import type {FamilyStatus} from '$lib/forms/fields/FamilyStatusInput.svelte'
     import InputRow from "$lib/forms/fields/InputRow.svelte";
     import NumberField from "$lib/forms/fields/NumberField.svelte";
     import RadioField from "$lib/forms/fields/RadioField.svelte";
     import StringField from "$lib/forms/fields/StringField.svelte";
+    import { personalFormData } from "./forms";
 
-    export let store: Writable<any>
+    let {russianName, englishName, birthday, familyStatus, salary, wantedJob} = get(personalFormData.raw)
+    const formData = personalFormData.raw
 
-    let russianName: string
-    let englishName: string
-    let birthday: string
-    let familyStatus: FamilyStatus
-    let salary: number
-    let wantedJob: 'germany' | 'europe';
-    
-    ({russianName, englishName, birthday, familyStatus, salary, wantedJob} = get(store))
-
-    russianName ??= ''
-    englishName ??= ''
-    salary ??= NaN
-    wantedJob ??= 'germany'
-
-    $: $store = {
+    $: $formData = {
         russianName,
         englishName,
         birthday,
