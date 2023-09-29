@@ -3,22 +3,11 @@
 
     export let label: string = ''
     export let value: number = NaN
-
-    $: valueStr = isNaN(value) ? '' : value.toString()
-
-    function handleInput(e: any) {
-        value = parseFloat(e.target.value)
-    }
 </script>
 
 <div class="wrapper">
     <Input {label}>
-        <input type="text"
-        class:error={isNaN(value)} 
-        inputmode="numeric" 
-        on:input={handleInput}
-        value={valueStr}
-        >
+        <input type="number" bind:value>
     </Input>
 </div>
 

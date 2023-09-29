@@ -3,15 +3,18 @@
     import Form from "$lib/forms/Form.svelte";
     import FormHeader from "$lib/forms/FormHeader.svelte";
     import DateField from "$lib/forms/fields/DateField.svelte";
-    import FamilyStatusInput from "$lib/forms/fields/FamilyStatusInput.svelte";
+    import FamilyStatusInput, { type FamilyStatus } from "$lib/forms/fields/FamilyStatusInput.svelte";
     import InputRow from "$lib/forms/fields/InputRow.svelte";
     import NumberField from "$lib/forms/fields/NumberField.svelte";
     import RadioField from "$lib/forms/fields/RadioField.svelte";
     import StringField from "$lib/forms/fields/StringField.svelte";
     import { personalFormData } from "./forms";
 
-    let {russianName, englishName, birthday, familyStatus, salary, wantedJob} = get(personalFormData.raw)
     const formData = personalFormData.raw
+
+    let russianName: string, englishName: string, birthday: string, familyStatus: FamilyStatus, salary: number, wantedJob: string;
+
+    ({russianName, englishName, birthday, familyStatus, salary, wantedJob} = get(formData))
 
     $: $formData = {
         russianName,

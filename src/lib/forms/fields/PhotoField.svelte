@@ -5,14 +5,14 @@
     export let label: string
     export let files: FileList | undefined = undefined
     
-    let src: any = NoIcon
+    export let src: string = NoIcon
     
     $: {
         if (files && files[0]) {
             let reader = new FileReader()
             reader.onload = function() {
-                console.log(this.result)
-                src = this.result
+                if (this.result == null) return
+                src = this.result as string
             }
             reader.readAsDataURL(files[0])
         } else {
@@ -23,8 +23,8 @@
 
 <Input {label}>
     <input type="file" bind:files>
-    <div class="icon">
-        <img {src} alt="Нет иконки">
+    <div class="icon" class:not-empty={![NoIcon, ''].find(s => s == src)}>
+        <img src={src || NoIcon} alt="Нет иконки">
     </div>
 </Input>
 
@@ -35,11 +35,14 @@
 
     .icon {
         cursor: pointer;
-        border: 2px solid #828282;
         border-radius: 0.625rem;
         overflow: hidden; /* cut image */
         display: flex;
         align-items: center;
+    }
+    
+    .icon.not-empty {
+        border: 2px solid #828282;
     }
 
     img {

@@ -3,14 +3,6 @@
     import Personal from "./Personal.svelte";
     import Contacts from "./Contacts.svelte";
     import Education from "./Education.svelte";
-
-    const personal = personalFormData.valid
-    const contacts = contactsFormData.valid
-
-    const data = {
-        personal: $personal,
-        contacts: $contacts
-    }
 </script>
 
 <div class="wrapper">

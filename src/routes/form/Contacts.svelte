@@ -7,10 +7,11 @@
     import StringField from "$lib/forms/fields/StringField.svelte";
     import { contactsFormData } from "./forms";
 
-    let {country, city, street, flat, index, phone, email} = get(contactsFormData.raw)
-    let data = contactsFormData.raw
+    let formData = contactsFormData.raw
+    let country: string, city: string, street: string, flat: string, index: string, phone: string, email: string
+    ({country, city, street, flat, index, phone, email} = get(formData))
 
-    $: $data = {
+    $: $formData = {
         country,
         city,
         street,

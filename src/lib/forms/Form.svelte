@@ -8,7 +8,7 @@
 <style>
     .wrapper {
         background-color: white;
-        padding: 1.25rem;
+        padding: 1rem;
         border-radius: 1.875rem;
         max-width: 800px;
         flex-grow: 1;

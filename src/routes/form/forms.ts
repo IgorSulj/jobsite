@@ -66,3 +66,16 @@ export const contactsFormData = withValidation(
         email: ''
     })
 )
+
+export function createEducationStore(index: number) {
+    return withValidation(
+        getLocalStorageStore(`form:education:${index}`, {
+            photo: '',
+            start: 2000,
+            end: 2000,
+            name: '',
+            specialization: '',
+            qualification: ''
+        })
+    )
+}
