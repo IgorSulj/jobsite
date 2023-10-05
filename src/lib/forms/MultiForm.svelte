@@ -14,7 +14,7 @@
     }>()
 
     export let createStore: (index: number) => ValidatedStore<T>
-    export let maxSize: number
+    export let maxSize: number = Infinity
     export let stores: ValidatedStore<T>[] = [createStore(0)]
 
     let index = 0

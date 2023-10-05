@@ -1,9 +1,10 @@
 <script lang="ts">
     export let label: string = ''
+    export let inlineLabel = false
 </script>
 
 
-<label>
+<label class:inline={inlineLabel}>
     {#if label}
     <p>{label}</p>
     {/if}
@@ -22,7 +23,11 @@
         margin-bottom: 0.3125rem;
     }
 
-    label :global(input), label :global(select) {
+    .inline p {
+        display: inline;
+    }
+    
+    label :global(input), label :global(select), label :global(textarea) {
         width: 100%;
         border-radius: 0.625rem;
         border: 2px solid #828282;
@@ -30,6 +35,10 @@
         font-family: var(--geologica);
         font-weight: 100;
         padding: 0.75rem;
+    }
+
+    .inline :global(input) {
+        width: auto;
     }
 
     label :global(select) {

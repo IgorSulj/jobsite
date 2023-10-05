@@ -1,14 +1,17 @@
 <script lang="ts">
-    import { personalFormData, contactsFormData } from "./forms";
     import Personal from "./Personal.svelte";
     import Contacts from "./Contacts.svelte";
     import Education from "./Education.svelte";
+    import Experience from "./Experience.svelte";
+    import Additional from "./Additional.svelte";
 </script>
 
 <div class="wrapper">
     <Personal />
     <Contacts />
     <Education />
+    <Experience />
+    <Additional />
 </div>
 
 <style>

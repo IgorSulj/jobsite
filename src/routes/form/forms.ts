@@ -56,7 +56,7 @@ export const personalFormData = withValidation(
 )
 
 export const contactsFormData = withValidation(
-    getLocalStorageStore('form:personal', {
+    getLocalStorageStore('form:contacts', {
         country: '',
         city: '',
         street: '',
@@ -79,3 +79,16 @@ export function createEducationStore(index: number) {
         })
     )
 }
+
+export function createExperienceStore(index: number) {
+    return withValidation(
+        getLocalStorageStore(`form:experience:${index}`, {
+            organization: '',
+            position: '',
+            skills: '',
+            start: 2000,
+            end: 2000
+        })
+    )
+}
+
