@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { get } from "svelte/store";
     import Form from "$lib/forms/Form.svelte";
     import FormHeader from "$lib/forms/FormHeader.svelte";
     import DateField from "$lib/forms/fields/DateField.svelte";
@@ -8,24 +7,38 @@
     import NumberField from "$lib/forms/fields/NumberField.svelte";
     import RadioField from "$lib/forms/fields/RadioField.svelte";
     import StringField from "$lib/forms/fields/StringField.svelte";
-    import { personalFormData } from "./forms";
+    import { guardAgainst, validated } from "./forms";
 
-    const formData = personalFormData.raw
-
-    let russianName: string, englishName: string, birthday: string, familyStatus: FamilyStatus, salary: number, wantedJob: string;
-
-    ({russianName, englishName, birthday, familyStatus, salary, wantedJob} = get(formData))
-
-    $: $formData = {
-        russianName,
-        englishName,
-        birthday,
-        familyStatus,
-        salary,
-        wantedJob
+    const defaultData = {
+        russianName: '',
+        englishName: '',
+        birthday: '',
+        familyStatus: 'not-married' as FamilyStatus,
+        salary: 0,
+        wantedJob: ''
     }
+
+    const guard = guardAgainst<typeof defaultData>(
+        ['Некоторые поля не заполнены', data => [data.russianName, data.englishName, data.wantedJob].indexOf('') != -1],
+        ['Зарплата должна быть положительным числом', ({salary}) => isNaN(salary) || salary <= 0]
+    )
+
+    let {russianName, englishName, birthday, familyStatus, salary, wantedJob} = defaultData
+
+    export function collect() {
+        return validated(guard, {
+            russianName,
+            englishName,
+            birthday,
+            familyStatus,
+            salary,
+            wantedJob
+        })
+    }
+
+    $: errors = guard({russianName, englishName, birthday, familyStatus, salary, wantedJob})
 </script>
-<Form>
+<Form {errors}>
     <FormHeader slot="header">Личные данные</FormHeader>
     <StringField label="ФИО на русском" bind:value={russianName} />
     <StringField label="ФИО латиницей (как в паспорте)" bind:value={englishName} />

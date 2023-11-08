@@ -5,7 +5,7 @@
     export let label: string
     export let files: FileList | undefined = undefined
     
-    export let src: string = NoIcon
+    export let src: string = ''
     
     $: {
         if (files && files[0]) {
@@ -16,14 +16,14 @@
             }
             reader.readAsDataURL(files[0])
         } else {
-            src = NoIcon
+            src = ''
         }
     }
 </script>
 
 <Input {label}>
     <input type="file" bind:files>
-    <div class="icon" class:not-empty={![NoIcon, ''].find(s => s == src)}>
+    <div class="icon" class:not-empty={src != ''}>
         <img src={src || NoIcon} alt="Нет иконки">
     </div>
 </Input>

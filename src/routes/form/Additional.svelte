@@ -3,26 +3,17 @@
     import FormHeader from "$lib/forms/FormHeader.svelte";
     import Input from "$lib/forms/fields/Input.svelte";
     import StringField from "$lib/forms/fields/StringField.svelte";
-    import { get } from "svelte/store";
-    import { getLocalStorageStore } from "./forms";
 
-    let drivingLicense: string
-    let hadCriminalLiability: string
-    let additional: string
+    const defaultData = {
+        drivingLicense: '',
+        hadCriminalLiability: false,
+        additional: ''
+    }
 
-    const store = getLocalStorageStore('form:additional', {
-            drivingLicense: '',
-            hadCriminalLiability: '',
-            additional: ''
-        }
-    );
+    let {drivingLicense, hadCriminalLiability, additional} = defaultData
 
-    ({drivingLicense, hadCriminalLiability, additional} = get(store))
-
-    $: $store = {
-        drivingLicense,
-        hadCriminalLiability,
-        additional
+    export function collect() {
+        return {drivingLicense, hadCriminalLiability, additional}
     }
 </script>
 
@@ -30,7 +21,7 @@
     <FormHeader>Доп. информация</FormHeader>
     <StringField label="Категории водительского удостоверения" bind:value={drivingLicense} />
     <Input label="Привлекались ли вы к уголовной ответственности" inlineLabel={true}>
-        <input type="checkbox" bind:value={hadCriminalLiability}>
+        <input type="checkbox" bind:checked={hadCriminalLiability}>
     </Input>
     <Input label="Доп.информация">
         <textarea rows="5" bind:value={additional}></textarea>

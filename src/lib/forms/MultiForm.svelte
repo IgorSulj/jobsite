@@ -1,53 +1,61 @@
 <script lang="ts" generics="T">
     import { createEventDispatcher } from 'svelte'
+    import DeleteIcon from '$lib/img/form/delete.svg'
 
-    import type { Readable, Writable } from "svelte/store";
     import Form from "./Form.svelte";
 
-    type ValidatedStore<T> = {
-        raw: Writable<T>,
-        valid: Readable<T | undefined>
-    }
+    export let createDefault: (index: number) => T
+    export let maxSize: number = Infinity
 
-    export let dispatcher = createEventDispatcher<{
-        onstorechange: Writable<T>
+    let formsetData: T[] = [createDefault(0)]
+    let index = 0
+    export let guard: (value: T) => string[] = () => []
+    $: errors = guard(formsetData[index])
+
+    export let dispatch = createEventDispatcher<{
+        onindexchange: T
     }>()
 
-    export let createStore: (index: number) => ValidatedStore<T>
-    export let maxSize: number = Infinity
-    export let stores: ValidatedStore<T>[] = [createStore(0)]
+    export function collect() {
+        return formsetData.find(elem => guard(elem).length == 0) ? formsetData : undefined
+    }
 
-    let index = 0
-    $: currentStore = stores[index]
+    export function update(value: T) {
+        formsetData[index] = value
+        formsetData = formsetData
+    }
+
 </script>
-<Form>
+<Form {errors}>
     <svelte:fragment slot="header">
         <div class="selector">
             <div class="left">
                 {#if index > 0}
                     <button on:click={() => {
-                        dispatcher('onstorechange', stores[index - 1].raw);
+                        dispatch('onindexchange', formsetData[index - 1])
                         index--
                     }}>&lt;</button>
                 {/if}
             </div>
 
             <div class="status">
-                {#each stores as _, i (i)}
+                {#each formsetData as _, i (i)}
                     <div class="store__status" class:active-store={i == index}></div>
                 {/each}
             </div>
             <div class="right">
-                {#if index == stores.length - 1 && stores.length < maxSize}
+                <div class="delete">
+                    <img src={DeleteIcon} alt="Удалить">
+                </div>
+                {#if index == formsetData.length - 1 && formsetData.length < maxSize}
                     <button on:click={() => {
-                        let newStore = createStore(index + 1)
-                        dispatcher('onstorechange', newStore.raw)
-                        stores.push(newStore)
+                        formsetData.push(createDefault(index + 1))
+                        dispatch('onindexchange', formsetData[index + 1])
                         index++
                     }}>+</button>
                 {:else if index < maxSize - 1}
                     <button on:click={() => {
-                        dispatcher('onstorechange', stores[index + 1].raw)
+                        dispatch('onindexchange', formsetData[index + 1])
                         index++
                     }}>{">"}</button>
                 {/if}
@@ -55,7 +63,7 @@
         </div>
         <slot name="header" />
     </svelte:fragment>
-    <slot current={currentStore.raw} />
+    <slot current={formsetData[index]} />
 </Form>
 
 <style>
@@ -76,7 +84,7 @@
     }
 
     .right {
-        width: 2rem;
+        display: flex;
     }
 
     .store__status {
@@ -95,5 +103,16 @@
         justify-content: center;
         flex: 1 1 auto;
         gap: 0.5rem;
+    }
+
+    .delete {
+        aspect-ratio: 1 / 1;
+        height: 100%;
+        position: relative;
+    }
+
+    .delete img {
+        width: 100%;
+        height: 100%;
     }
 </style>

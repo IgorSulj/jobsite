@@ -3,40 +3,35 @@
     import MultiForm from "$lib/forms/MultiForm.svelte";
     import StringField from "$lib/forms/fields/StringField.svelte";
     import YearSpanField from "$lib/forms/fields/YearSpanField.svelte";
-    import { get, type Writable } from "svelte/store";
-    import { createExperienceStore, getLocalStorageStore } from "./forms";
+    import { guardAgainst } from "./forms";
 
-    let organization: string = ''
-    let position: string = ''
-    let skills: string = ''
-    let start: number = 2000
-    let end: number = 2000
-
-    let currentStore: ReturnType<typeof createExperienceStore>['raw'] = 
-        getLocalStorageStore("form:experience:0", {
-            organization,
-            position,
-            skills,
-            start,
-            end
-        });
-    
-    ({organization, position, skills, start, end} = get(currentStore))
-
-    $: $currentStore = {
-        organization,
-        position,
-        skills,
-        start,
-        end
+    const defaultData = {
+        organization: '',
+        position: '',
+        skills: '',
+        start: 2000,
+        end: 2000
     }
+
+    const guard = guardAgainst<typeof defaultData>(
+        ['Некоторые поля не заполнены', data => data.organization == '' || data.position == '' || data.skills == ''],
+        ['Некорректный интервал', data => data.end < data.start]
+    )
+
+    let {organization, position, skills, start, end} = defaultData
+    let form: MultiForm<typeof defaultData>
+
+    export function collect() {
+        return form.collect()
+    }
+
+    $: form?.update({organization, position, skills, start, end})
 </script>
 
-<MultiForm createStore={createExperienceStore} on:onstorechange={e => {
-    let data = get(e.detail);
-    ({organization, position, skills, start, end} = data)
-    currentStore = e.detail
-}}>
+<MultiForm createDefault={() => defaultData} 
+        on:onindexchange={e => ({organization, position, skills, start, end} = e.detail)}
+        {guard}  
+        bind:this={form}>
     <FormHeader>Опыт работы</FormHeader>
     <StringField label="Организация" bind:value={organization}  />
     <StringField label="Должность" bind:value={position} />

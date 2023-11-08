@@ -1,8 +1,15 @@
-<div class="wrapper">
+<script lang="ts">
+    export let errors: string[] = []
+</script>
+
+<div class="wrapper" class:has-errors={errors.length > 0}>
     <slot name="header" />
     <div class="fields">
         <slot />
     </div>
+    {#each errors as error }
+        <p>{error}</p>
+    {/each}
 </div>
 
 <style>
@@ -12,6 +19,15 @@
         border-radius: 1.875rem;
         max-width: 800px;
         flex-grow: 1;
+    }
+
+    .has-errors {
+        border: 1px solid red;
+    }
+
+    p {
+        color: red;
+        font-family: var(--geologica);
     }
 
     .fields {

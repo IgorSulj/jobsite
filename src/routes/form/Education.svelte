@@ -1,53 +1,45 @@
 <script lang="ts">
-    import Form from "$lib/forms/Form.svelte";
+    import { updated } from "$app/stores";
     import FormHeader from "$lib/forms/FormHeader.svelte";
     import MultiForm from "$lib/forms/MultiForm.svelte";
     import InputRow from "$lib/forms/fields/InputRow.svelte";
     import PhotoField from "$lib/forms/fields/PhotoField.svelte";
     import StringField from "$lib/forms/fields/StringField.svelte";
     import YearSpanField from "$lib/forms/fields/YearSpanField.svelte";
-    import { get, type Writable } from "svelte/store";
-    import { createEducationStore, getLocalStorageStore } from "./forms";
-    import { beforeUpdate } from "svelte";
+    import { guardAgainst } from "./forms";
 
-    let currentStoreRaw: ReturnType<typeof createEducationStore>['raw'] = createEducationStore(0).raw
-
-    let photo = ''
-    let start: number = 2023
-    let end: number = 2023
-    let name = ''
-    let specialization = ''
-    let qualification = '';
-
-    ({photo, start, end, name, specialization, qualification} = get(getLocalStorageStore("form:education:0", {
-        photo,
-        start,
-        end,
-        name,
-        specialization,
-        qualification
-    })))
-
-
-    $: {
-        currentStoreRaw?.set({
-            photo,
-            start,
-            end,
-            name,
-            specialization,
-            qualification
-        })
+    const defaultData = {
+        photo: '',
+        start: 2023,
+        end: 2023,
+        name: '',
+        specialization: '',
+        qualification: ''
     }
+
+    let {photo, start, end, name, specialization, qualification} = defaultData
+    let form: MultiForm<typeof defaultData>
+
+
+    export function collect() {
+        return form.collect()
+    }
+
+    $: form?.update({photo, start, end, name, specialization, qualification})
+
 </script>
 
-<MultiForm createStore={createEducationStore} 
-            maxSize={3} 
-            on:onstorechange={e => {
-                let data = get(e.detail);
-                ({photo, start, end, name, specialization, qualification} = data)
-                currentStoreRaw = e.detail
-            }}>
+<MultiForm createDefault={() => defaultData}
+            maxSize={3}
+            guard={guardAgainst(
+                ['Некоторые поля пусты', data => data.photo == '' || data.name == '' || data.specialization == '' || data.qualification == ''],
+                ['Даты - не числа', data => isNaN(data.start) || isNaN(data.end)],
+                ['Конец интервала раньше начала', data => data.end < data.start]
+            )}
+            on:onindexchange={e => {
+                ({photo, start, end, name, specialization, qualification} = e.detail)
+            }}
+            bind:this={form}>
     <FormHeader slot="header">
         Высшее образование
     </FormHeader>

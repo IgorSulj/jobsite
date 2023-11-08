@@ -1,27 +1,44 @@
 <script lang="ts">
-    import { get, type Writable } from "svelte/store";
     import Form from "$lib/forms/Form.svelte";
     import FormHeader from "$lib/forms/FormHeader.svelte";
     import InputRow from "$lib/forms/fields/InputRow.svelte";
-    import PhoneInput from "$lib/forms/fields/PhoneInput.svelte";
     import StringField from "$lib/forms/fields/StringField.svelte";
-    import { contactsFormData } from "./forms";
+    import { emailRegex, guardAgainst, phoneRegex, validated } from "./forms";
 
-    let formData = contactsFormData.raw
-    let country: string, city: string, street: string, flat: string, index: string, phone: string, email: string
-    ({country, city, street, flat, index, phone, email} = get(formData))
-
-    $: $formData = {
-        country,
-        city,
-        street,
-        flat,
-        index,
-        phone,
-        email
+    const defaultData = {
+        country: '',
+        city: '',
+        street: '',
+        flat: '',
+        index: '',
+        phone: '',
+        email: ''
     }
+
+    const guard = guardAgainst<typeof defaultData>(
+        ['Некоторые поля не заполнены', data => Object.values(data).indexOf('') != -1],
+        ['Некорректный номер телефона', data => data.phone != "" && !data.phone.match(phoneRegex)],
+        ['Некорректный формат email', data => data.email != "" && !data.email.match(emailRegex)]
+    )
+
+    let {country, city, street, flat, index, phone, email} = defaultData
+
+
+    export function collect() {
+        return validated(guard, {
+            country,
+            city,
+            street,
+            flat,
+            index,
+            phone,
+            email
+        })
+    }
+
+    $: errors = guard({country, city, street, flat, index, phone, email})
 </script>
-<Form>
+<Form {errors}>
     <FormHeader>Контакты</FormHeader>
     <InputRow>
         <StringField label="Страна" bind:value={country} />
