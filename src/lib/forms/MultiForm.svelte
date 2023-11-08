@@ -44,9 +44,15 @@
                 {/each}
             </div>
             <div class="right">
-                <div class="delete">
-                    <img src={DeleteIcon} alt="Удалить">
-                </div>
+                {#if formsetData.length > 1}
+                    <button class="delete" on:click={() => {
+                        formsetData.splice(index, 1)
+                        if (index > 0) index--
+                        formsetData = formsetData
+                    }}>
+                        <img src={DeleteIcon} alt="Удалить">
+                    </button>
+                {/if}
                 {#if index == formsetData.length - 1 && formsetData.length < maxSize}
                     <button on:click={() => {
                         formsetData.push(createDefault(index + 1))
@@ -80,11 +86,14 @@
     }
 
     .left {
+        display: flex;
+        align-items: center;
         width: 2rem;
     }
 
     .right {
         display: flex;
+        align-items: center;
     }
 
     .store__status {
@@ -106,13 +115,12 @@
     }
 
     .delete {
-        aspect-ratio: 1 / 1;
         height: 100%;
-        position: relative;
+        aspect-ratio: 1 / 1;
+        color: #777;
     }
 
-    .delete img {
-        width: 100%;
-        height: 100%;
+    :is(.right, .left) button {
+        line-height: 1rem;
     }
 </style>

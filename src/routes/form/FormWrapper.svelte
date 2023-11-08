@@ -51,7 +51,6 @@
 </form>
 
 <style>
-
     form > :global(*) {
         margin: 0 auto 2rem;
     }
@@ -66,11 +65,13 @@
 
     .button-wrapper {
         max-width: 800px;
+        padding-bottom: 2rem;
     }
 
     button {
         float: right;
         font-family: var(--geologica);
         font-size: 1.25rem;
+        padding: 0.5rem;
     }
 </style>

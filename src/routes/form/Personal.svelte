@@ -19,7 +19,7 @@
     }
 
     const guard = guardAgainst<typeof defaultData>(
-        ['Некоторые поля не заполнены', data => [data.russianName, data.englishName, data.wantedJob].indexOf('') != -1],
+        ['Некоторые поля не заполнены', data => [data.russianName, data.englishName, data.birthday, data.wantedJob].indexOf('') != -1],
         ['Зарплата должна быть положительным числом', ({salary}) => isNaN(salary) || salary <= 0]
     )
 
