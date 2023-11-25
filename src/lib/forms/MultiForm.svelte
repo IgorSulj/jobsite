@@ -7,11 +7,10 @@
     export let createDefault: (index: number) => T
     export let maxSize: number = Infinity
 
-    let formsetData: T[] = [createDefault(0)]
-    let index = 0
+    let formsetData: T[] = []
+    let index = -1
     export let guard: (value: T) => string[] = () => []
-    $: errors = guard(formsetData[index])
-
+    $: errors = formsetData.length > 0 ? guard(formsetData[index]) : []
     export let dispatch = createEventDispatcher<{
         onindexchange: T
     }>()
@@ -44,10 +43,11 @@
                 {/each}
             </div>
             <div class="right">
-                {#if formsetData.length > 1}
+                {#if formsetData.length >= 1}
                     <button class="delete" on:click={() => {
                         formsetData.splice(index, 1)
-                        if (index > 0) index--
+                        if (index == formsetData.length) index--
+                        dispatch('onindexchange', formsetData[index])
                         formsetData = formsetData
                     }}>
                         <img src={DeleteIcon} alt="Удалить">
@@ -69,7 +69,9 @@
         </div>
         <slot name="header" />
     </svelte:fragment>
-    <slot current={formsetData[index]} />
+    {#if formsetData.length > 0}
+        <slot form={formsetData[index]} />
+    {/if}
 </Form>
 
 <style>

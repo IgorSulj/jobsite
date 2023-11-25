@@ -32,7 +32,7 @@
         on:onindexchange={e => ({organization, position, skills, start, end} = e.detail)}
         {guard}  
         bind:this={form}>
-    <FormHeader>Опыт работы</FormHeader>
+    <FormHeader slot="header">Опыт работы</FormHeader>
     <StringField label="Организация" bind:value={organization}  />
     <StringField label="Должность" bind:value={position} />
     <StringField label="Навыки" bind:value={skills} />
