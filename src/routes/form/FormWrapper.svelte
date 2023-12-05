@@ -17,6 +17,7 @@
         let educationData = education.collect()
         let experienceData = experience.collect()
         let additionalData = additional.collect()
+        console.log(personalData, contactsData, educationData, experienceData, additionalData)
         return personalData &&
                contactsData &&
                educationData &&
@@ -51,6 +52,10 @@
 </form>
 
 <style>
+    form {
+        padding: 0 1rem;
+    }
+
     form > :global(*) {
         margin: 0 auto 2rem;
     }

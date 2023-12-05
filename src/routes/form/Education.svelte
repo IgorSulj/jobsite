@@ -41,7 +41,7 @@
             }}
             bind:this={form}>
     <FormHeader slot="header">
-        Высшее образование
+        Образование
     </FormHeader>
     <InputRow>
         <PhotoField label="Фото" bind:src={photo} />

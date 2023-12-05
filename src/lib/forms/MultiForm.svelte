@@ -16,12 +16,30 @@
     }>()
 
     export function collect() {
-        return formsetData.find(elem => guard(elem).length == 0) ? formsetData : undefined
+        return formsetData.find(elem => guard(elem).length != 0) ? undefined : formsetData
     }
 
     export function update(value: T) {
         formsetData[index] = value
         formsetData = formsetData
+    }
+
+    export const handleDelete = () => {
+        formsetData.splice(index, 1)
+        if (index == formsetData.length) index--
+        dispatch('onindexchange', formsetData[index])
+        formsetData = formsetData
+    }
+
+    export const handleCreate = () => {
+        formsetData.push(createDefault(index + 1))
+        dispatch('onindexchange', formsetData[index + 1])
+        index++
+    }
+
+    export const handleGetNext = () => {
+        dispatch('onindexchange', formsetData[index + 1])
+        index++
     }
 
 </script>
@@ -44,26 +62,12 @@
             </div>
             <div class="right">
                 {#if formsetData.length >= 1}
-                    <button class="delete" on:click={() => {
-                        formsetData.splice(index, 1)
-                        if (index == formsetData.length) index--
-                        dispatch('onindexchange', formsetData[index])
-                        formsetData = formsetData
-                    }}>
-                        <img src={DeleteIcon} alt="Удалить">
-                    </button>
+                    <button class="delete" on:click={handleDelete}>Удалить</button>
                 {/if}
                 {#if index == formsetData.length - 1 && formsetData.length < maxSize}
-                    <button on:click={() => {
-                        formsetData.push(createDefault(index + 1))
-                        dispatch('onindexchange', formsetData[index + 1])
-                        index++
-                    }}>+</button>
+                    <button on:click={handleCreate}>Добавить</button>
                 {:else if index < maxSize - 1}
-                    <button on:click={() => {
-                        dispatch('onindexchange', formsetData[index + 1])
-                        index++
-                    }}>{">"}</button>
+                    <button on:click={handleGetNext}>След.</button>
                 {/if}
             </div>
         </div>
@@ -76,14 +80,11 @@
 
 <style>
     .selector {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
     }
 
     .selector button {
-        border: none;
-        background-color: transparent;
-        color: #777;
-        font-size: 2rem;
         cursor: pointer;
     }
 
@@ -96,6 +97,8 @@
     .right {
         display: flex;
         align-items: center;
+        justify-content: right;
+        gap: 0.5rem;
     }
 
     .store__status {
@@ -118,11 +121,6 @@
 
     .delete {
         height: 100%;
-        aspect-ratio: 1 / 1;
         color: #777;
-    }
-
-    :is(.right, .left) button {
-        line-height: 1rem;
     }
 </style>
