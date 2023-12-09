@@ -13,9 +13,9 @@
 
     article {
         background-color: #eee;
-        width: 100vw;
+        width: 100%;
         min-height: 100vh;
-        padding-top: 2rem;
+        padding: 2rem 0.5rem 0;
     }
 
 </style>

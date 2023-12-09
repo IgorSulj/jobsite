@@ -39,7 +39,9 @@
         })
     }
 </script>
-
+<div>
+    <button on:click={() => window.history.back()} class='go-back'>Назад</button>
+</div>
 <form on:submit|preventDefault={handleClick}>
     <Personal bind:this={personal} />
     <Contacts bind:this={contacts} />
@@ -47,11 +49,22 @@
     <Experience bind:this={experience} />
     <Additional bind:this={additional} />
     <div class="button-wrapper">
-        <button>Отправить</button>
+        <button class="submit">Отправить</button>
     </div>
 </form>
 
 <style>
+    .go-back {
+        margin-bottom: 2rem;
+        padding: 0.5rem;
+        border: 2px solid black;
+        border-radius: 0.5rem;
+        background-color: transparent;
+        font-family: var(--geologica);
+        font-size: 1.25rem;
+        cursor: pointer;
+    }
+
     form {
         padding: 0 1rem;
     }
@@ -73,7 +86,7 @@
         padding-bottom: 2rem;
     }
 
-    button {
+    .submit {
         float: right;
         font-family: var(--geologica);
         font-size: 1.25rem;
