@@ -11,13 +11,14 @@
     let experience: Experience
     let additional: Additional
 
+    let serverPromise: Promise<{}> = Promise.resolve({});
+
     function collect() {
         let personalData = personal.collect()
         let contactsData = contacts.collect()
         let educationData = education.collect()
         let experienceData = experience.collect()
         let additionalData = additional.collect()
-        console.log(personalData, contactsData, educationData, experienceData, additionalData)
         return personalData &&
                contactsData &&
                educationData &&
@@ -32,11 +33,16 @@
     }
 
     function handleClick() {
-        fetch('http://localhost:8000/', {
+        const collected = collect();
+        if (collected === undefined) {
+            serverPromise = Promise.reject('Некоторые поля не заполнены или заполнены некорректно.')
+            return
+        }
+        serverPromise = fetch('http://localhost:8000/', {
             method: 'POST',
-            body: JSON.stringify(collect()),
+            body: JSON.stringify(collected),
             headers: {'Content-Type': 'application/json'}
-        })
+        }).catch(() => Promise.reject('Произошла ошибка. Повторите попытку.'))
     }
 </script>
 <div>
@@ -49,7 +55,18 @@
     <Experience bind:this={experience} />
     <Additional bind:this={additional} />
     <div class="button-wrapper">
-        <button class="submit">Отправить</button>
+        <button class="submit">
+            {#await serverPromise}
+            ...
+            {:then}
+            Отправить
+            {:catch}
+            Отправить
+            {/await}
+        </button>
+        {#await serverPromise catch error}
+        <p class="error">{error}</p>
+        {/await}
     </div>
 </form>
 
@@ -63,6 +80,10 @@
         font-family: var(--geologica);
         font-size: 1.25rem;
         cursor: pointer;
+    }
+
+    .go-back:hover {
+        background-color: #ddd;
     }
 
     form {
@@ -82,14 +103,22 @@
     }
 
     .button-wrapper {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
         max-width: 800px;
         padding-bottom: 2rem;
     }
 
+    .error {
+        color: red;
+        font-family: var(--geologica);
+    }
+
     .submit {
-        float: right;
         font-family: var(--geologica);
         font-size: 1.25rem;
         padding: 0.5rem;
+        width: 8rem;
     }
 </style>
