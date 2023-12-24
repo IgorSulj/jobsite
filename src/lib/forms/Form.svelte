@@ -8,7 +8,7 @@
         <slot />
     </div>
     {#each errors as error }
-        <p>{error}</p>
+        <p class="error">{error}</p>
     {/each}
 </div>
 
@@ -25,7 +25,7 @@
         border: 1px solid red;
     }
 
-    p {
+    p.error {
         color: red;
         font-family: var(--geologica);
     }

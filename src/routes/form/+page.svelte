@@ -2,6 +2,9 @@
     import FormWrapper from "./FormWrapper.svelte";
 </script>
 
+<svelte:head>
+    <title>Анкета</title>
+</svelte:head>
 <article>
     <FormWrapper />
 </article>
