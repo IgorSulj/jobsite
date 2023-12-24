@@ -4,6 +4,7 @@
     import Education from "./Education.svelte";
     import Experience from "./Experience.svelte";
     import Additional from "./Additional.svelte";
+    import { goto } from "$app/navigation";
 
     let personal: Personal
     let contacts: Contacts
@@ -11,7 +12,7 @@
     let experience: Experience
     let additional: Additional
 
-    let serverPromise: Promise<{}> = Promise.resolve({});
+    let serverPromise: Promise<{}> | undefined = undefined;
 
     function collect() {
         let personalData = personal.collect()
@@ -38,11 +39,16 @@
             serverPromise = Promise.reject('Некоторые поля не заполнены или заполнены некорректно.')
             return
         }
-        serverPromise = fetch('http://localhost:8000/', {
-            method: 'POST',
-            body: JSON.stringify(collected),
-            headers: {'Content-Type': 'application/json'}
-        }).catch(() => Promise.reject('Произошла ошибка. Повторите попытку.'))
+        serverPromise = new Promise(resolve => {
+            setTimeout(() => {
+                resolve({})
+            }, 1000)
+        })
+        // serverPromise = fetch('http://localhost:8000/', {
+        //     method: 'POST',
+        //     body: JSON.stringify(collected),
+        //     headers: {'Content-Type': 'application/json'}
+        // }).catch(() => Promise.reject('Произошла ошибка. Повторите попытку.'))
     }
 </script>
 <div>
@@ -55,18 +61,35 @@
     <Experience bind:this={experience} />
     <Additional bind:this={additional} />
     <div class="button-wrapper">
-        <button class="submit">
+        <!-- <button class="submit">
+            {#if serverPromise}
+                {#await serverPromise}
+                ...
+                {:then}
+                Отправить
+                {:catch}
+                Отправить
+                {/await}
+            {:else}
+                Отправить
+            {/if}
+        </button> -->
+        {#if serverPromise}
             {#await serverPromise}
-            ...
+            <button class="submit" disabled>...</button>
             {:then}
-            Отправить
+            <button
+             class="submit" 
+             on:click|preventDefault={() => goto('/')}
+             >На главную</button>
+            <p class="success">Отправлено успешно</p>
             {:catch}
-            Отправить
+            <button class="submit">Отправить</button>
+            <p class="error">Произошла ошибка. Повторите попытку.</p>
             {/await}
-        </button>
-        {#await serverPromise catch error}
-        <p class="error">{error}</p>
-        {/await}
+        {:else}
+            <button class="submit">Отправить</button>
+        {/if}
     </div>
 </form>
 
@@ -115,10 +138,16 @@
         font-family: var(--geologica);
     }
 
+    .success {
+        color: green;
+        font-family: var(--geologica);
+    }
+
     .submit {
         font-family: var(--geologica);
         font-size: 1.25rem;
         padding: 0.5rem;
-        width: 8rem;
+        width: 12rem;
+        cursor: pointer;
     }
 </style>
