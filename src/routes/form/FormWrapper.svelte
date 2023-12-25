@@ -39,16 +39,18 @@
             serverPromise = Promise.reject('Некоторые поля не заполнены или заполнены некорректно.')
             return
         }
-        serverPromise = new Promise(resolve => {
-            setTimeout(() => {
-                resolve({})
-            }, 1000)
+        serverPromise = fetch('https://api.rabotavsem.by/', {
+            method: 'POST',
+            body: JSON.stringify(collected),
+            headers: {'Content-Type': 'application/json'}
         })
-        // serverPromise = fetch('http://localhost:8000/', {
-        //     method: 'POST',
-        //     body: JSON.stringify(collected),
-        //     headers: {'Content-Type': 'application/json'}
-        // }).catch(() => Promise.reject('Произошла ошибка. Повторите попытку.'))
+        .then(resp => {
+            if (resp.ok) {
+                return resp
+            }
+            return Promise.reject()
+        })
+        .catch(() => Promise.reject('Произошла ошибка. Повторите попытку.'))
     }
 </script>
 <div>
