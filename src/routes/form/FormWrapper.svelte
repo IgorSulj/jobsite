@@ -61,19 +61,6 @@
     <Experience bind:this={experience} />
     <Additional bind:this={additional} />
     <div class="button-wrapper">
-        <!-- <button class="submit">
-            {#if serverPromise}
-                {#await serverPromise}
-                ...
-                {:then}
-                Отправить
-                {:catch}
-                Отправить
-                {/await}
-            {:else}
-                Отправить
-            {/if}
-        </button> -->
         {#if serverPromise}
             {#await serverPromise}
             <button class="submit" disabled>...</button>
@@ -83,9 +70,9 @@
              on:click|preventDefault={() => goto('/')}
              >На главную</button>
             <p class="success">Отправлено успешно</p>
-            {:catch}
+            {:catch err}
             <button class="submit">Отправить</button>
-            <p class="error">Произошла ошибка. Повторите попытку.</p>
+            <p class="error">{err}</p>
             {/await}
         {:else}
             <button class="submit">Отправить</button>
