@@ -41,7 +41,7 @@
             <span class="border"></span>
             <a href="{link}" 
             class="link"
-            class:active={$page.route.id == link}>{name}</a>
+            class:active={$page.url.pathname == link}>{name}</a>
         {/each}
     </div>
 </header>

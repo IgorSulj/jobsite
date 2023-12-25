@@ -6,7 +6,8 @@
     const links = [
         ['/', 'Германия'],
         ['/rabota-v-evrope', 'Европа'],
-        ['/contacts', 'Контакты']
+        ['/contacts', 'Контакты'],
+        ['/form', 'Анкета'],
     ] as const
 
     let isSmallQuery = mediaQuery('(max-width: 900px)')
