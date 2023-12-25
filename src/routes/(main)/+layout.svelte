@@ -1,6 +1,5 @@
 <script lang="ts">
     import {navigating} from '$app/stores'
-    import 'reset-css/reset.css'
     import Header from './Header.svelte';
     import Footer from './Footer.svelte';
     import Spinner from '$lib/components/Spinner.svelte';

@@ -7,9 +7,11 @@
     <div class="fields">
         <slot />
     </div>
-    {#each errors as error }
+    <div class="errors">
+        {#each errors as error }
         <p class="error">{error}</p>
-    {/each}
+        {/each}
+    </div>
 </div>
 
 <style>
@@ -25,6 +27,12 @@
         border: 1px solid red;
     }
 
+    .errors {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
     p.error {
         color: red;
         font-family: var(--geologica);
@@ -34,5 +42,6 @@
         display: flex;
         flex-direction: column;
         gap: 1.25rem;
+        margin-bottom: 1rem;
     }
 </style>
