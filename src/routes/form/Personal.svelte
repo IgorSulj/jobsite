@@ -42,15 +42,28 @@
     <FormHeader slot="header">Личные данные</FormHeader>
     <StringField label="ФИО на русском" bind:value={russianName} />
     <StringField label="ФИО латиницей (как в паспорте)" bind:value={englishName} />
-    <InputRow>
+    <div class="wrapper">
         <DateField label="Дата рождения" bind:value={birthday} />
         <FamilyStatusInput label="Семейное положение" bind:value={familyStatus} />
-    </InputRow>
-    <InputRow>
+    </div>
+    <div class="wrapper">
         <NumberField label="Желаемая зарплата в месяц, €" bind:value={salary} />
         <RadioField label="Я хочу" points={{
             'germany': 'работать в Германии',
             'europe': 'работать вахтой'
         }} bind:value={wantedJob} />
-    </InputRow>
+    </div>
 </Form>
+
+<style>
+    .wrapper {
+        display: flex;
+        gap: 0.625rem;
+    }
+
+    @media (max-width: 600px) {
+        .wrapper {
+            flex-direction: column;
+        }
+    }
+</style>

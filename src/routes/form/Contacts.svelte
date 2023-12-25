@@ -40,13 +40,22 @@
 </script>
 <Form {errors}>
     <FormHeader>Контакты</FormHeader>
-    <InputRow>
+    <div class="address-fields">
         <StringField label="Страна" bind:value={country} />
         <StringField label="Город" bind:value={city} />
         <StringField label="Улица или др." bind:value={street} />
         <StringField label="Квартира" bind:value={flat} />
         <StringField label="Индекс" bind:value={index} />
-    </InputRow>
+    </div>
     <StringField label="Номер телефона" bind:value={phone} />
     <StringField label="Электронная почта" bind:value={email} />
 </Form>
+
+
+<style>
+    .address-fields {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 0.625rem;
+    }
+</style>

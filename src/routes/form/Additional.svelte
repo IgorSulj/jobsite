@@ -27,3 +27,9 @@
         <textarea rows="5" bind:value={additional}></textarea>
     </Input>
 </Form>
+
+<style>
+    textarea {
+        resize: vertical;
+    }
+</style>
